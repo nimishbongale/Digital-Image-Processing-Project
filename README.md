@@ -10,7 +10,7 @@ git clone https://github.com/nimishbongale/Digital-Image-Processing-Project.git
 
 ## Usage
 
-Run ```octavemagic_extension.ipynb```.
+Run ```bean-sorter.ipynb``` or ```bean-sorter.py```.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
