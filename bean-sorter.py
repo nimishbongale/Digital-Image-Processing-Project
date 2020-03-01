@@ -150,16 +150,16 @@ drive.mount('/content/drive')
 
 from fastai.vision import *
 
-path = Path('/content/drive/My Drive/DIP')
+path = Path('/content/drive/My Drive/dip paper')
 
-folder = ['super_inferior_batch', 'inferior_batch', 'mediocre_batch', 'superior_batch', 'super_superior_batch']
+folder = ['Defected coffee beans', 'Mixed coffee beans ', 'Perfect coffee beans']
 files = [x + '-coffee.csv' for x in folder]
 
 cd drive
 
 cd My\ Drive
 
-cd DIP
+cd dip\ paper
 
 ls
 
@@ -168,7 +168,7 @@ for x in folder:
   dest = path1/x
   dest.mkdir(parents=True, exist_ok=True)
 
-classes =  ['super_inferior_batch', 'inferior_batch', 'mediocre_batch', 'superior_batch', 'super_superior_batch']
+classes =  ['inferior_batch', 'mediocre_batch', 'superior_batch']
 
 np.random.seed(42)
 data = ImageDataBunch.from_folder(path, train=".", valid_pct=0.2,
@@ -178,13 +178,15 @@ data.classes
 
 data.show_batch(rows=3, figsize=(7,8))
 
-learn = cnn_learner(data, models.resnet50, metrics=error_rate)
-
 learn = cnn_learner(data, models.resnet50, metrics=accuracy)
 
-learn.fit_one_cycle(4)
+learn = cnn_learner(data, models.resnet34, metrics=accuracy)
+
+learn.fit_one_cycle(2)
 
 learn.fit_one_cycle(5, max_lr=slice(1e-4,1e-3))
+
+learn.predict(data.test_dl)
 
 interp = ClassificationInterpretation.from_learner(learn)
 
